@@ -4,20 +4,26 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href \"https://TamerHussien.github.io/github-search/\"",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish": "npx angular-cli-ghpages --dir=dist/github-search"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.1",
+    "@angular/cdk": "~11.2.8-sha-a9e5ad264",
     "@angular/common": "~11.2.1",
     "@angular/compiler": "~11.2.1",
     "@angular/core": "~11.2.1",
     "@angular/forms": "~11.2.1",
+    "@angular/material": "~11.2.8-sha-a9e5ad264",
     "@angular/platform-browser": "~11.2.1",
     "@angular/platform-browser-dynamic": "~11.2.1",
+    "@ngxs/devtools-plugin": "^3.7.1",
+    "@ngxs/schematics": "0.0.1-alpha.5",
+    "@ngxs/store": "^3.7.1",
     "@angular/router": "~11.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -25,11 +31,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.1",
+    "@angular-eslint/builder": "4.0.0",
+    "@angular-eslint/eslint-plugin": "4.0.0",
+    "@angular-eslint/eslint-plugin-template": "4.0.0",
+    "@angular-eslint/schematics": "4.0.0",
+    "@angular-eslint/template-parser": "4.0.0",
     "@angular/cli": "~11.2.1",
     "@angular/compiler-cli": "~11.2.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
+    "angular-cli-ghpages": "^1.0.0-rc.1",
+    "eslint": "^7.6.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",
@@ -39,7 +53,6 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~4.1.2"
   }
 }

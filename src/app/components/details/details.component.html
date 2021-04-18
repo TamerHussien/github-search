@@ -1,0 +1,31 @@
+<div *ngIf="(userLoading$ | async)"
+  style="display: flex; justify-content: center; align-items: center; background: white;">
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+<div *ngIf="selectedUserDetails$ | async as user">
+  <mat-dialog-content class="mat-typography">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{user.name}}</mat-card-title>
+        <mat-card-subtitle>{{user.login}}</mat-card-subtitle>
+      </mat-card-header>
+      <img class="card-img" src="{{user.avatar_url}}" alt="{{user.name}}">
+      <mat-card-content>
+      </mat-card-content>
+      <mat-list>
+        <mat-list-item *ngIf="user?.bio">Bio: {{user?.bio}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item >Followers Count: {{user?.followers}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Following Count: {{user?.following}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>User Url: <a href="{{user?.html_url}}"> Click Here</a></mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>
