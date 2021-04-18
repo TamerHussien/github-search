@@ -1,13 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 
+import { AppComponent } from './app.component';
+import { ListState } from './core/state/github-list.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
@@ -19,11 +19,14 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { ListComponent } from './components/list/list.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListComponent,
+    DetailsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -31,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: false}),
-    NgxsModule.forRoot([], {
+    NgxsModule.forRoot([ListState], {
       developmentMode: !environment.production
     }),
     BrowserAnimationsModule,

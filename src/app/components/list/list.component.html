@@ -1,0 +1,56 @@
+<form class="form" [formGroup]="formGroup">
+  <mat-form-field class="full-width">
+    <mat-label>Github User Search </mat-label>
+    <input matInput placeholder="Ex. Tamer" formControlName="userName">
+  </mat-form-field>
+</form>
+<div *ngIf="!(initialized$ | async)">
+  <mat-card>To start search just type user name in the search box</mat-card>
+</div>
+
+<div *ngIf="(hasErrors$ | async) && (initialized$ | async)">
+  <mat-card style="color: red;">Something went Wrong please try agin later</mat-card>
+</div>
+<div *ngIf="(initialized$ | async) && !(hasErrors$ | async)">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> <a href="{{element.html_url}}">{{element.login}}</a></td>
+    </ng-container>
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef> score </th>
+      <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+    </ng-container>
+    <ng-container matColumnDef="avatar_url">
+      <th mat-header-cell *matHeaderCellDef> Avatar </th>
+      <td mat-cell *matCellDef="let element"> <img width="100px" height="100px" src="{{element.avatar_url}}"
+          alt="element.avatar_url "></td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef> View </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button matTooltip="Info about the action" (click)="viewDetails(element)"
+          matTooltip="Info about the user">
+          <mat-icon style="cursor: pointer;" aria-hidden="false">visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [length]="(totalCount$ | async)" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    isShowFirstLastBtn (page)="onChangePage($event)"></mat-paginator>
+  <div *ngIf="(isLoadingList$ | async)"
+    style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
